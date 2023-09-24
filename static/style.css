@@ -1,0 +1,303 @@
+*{
+  background-color: rgb(35, 35, 45);
+  color: rgb(255, 255, 255);
+  text-align: center;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: 'Inter', sans-serif;
+  display:block;
+  height: 100svh;
+}
+
+#home-page {
+  display:flex;
+  justify-content: center;
+  align-items: center;
+}
+
+#start-game {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  border: 1px solid rgb(145, 145, 145);
+  width: 50%;
+  height: 50%;
+  border-radius: 12px;
+  background-color: #2a2b3c;
+}
+
+#create-game,
+#find-game {
+  margin: auto 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background-color: inherit;
+}
+
+#create-game > h2, #find-game > h2 {
+  margin-bottom: 0.5em;
+  font-size: 2.25em;
+  background-color: inherit;
+}
+
+#start-game > h3 {
+  background-color: inherit;
+}
+
+#find-game-input,
+#create-game-input {
+  width: 60%;
+  height: 2em;
+  border: 2px solid #6670b1;
+  border-radius: 5px;
+  margin-bottom: 0.75em;
+}
+
+#find-game-submit,
+#create-game-submit {
+  width: 30%;
+  height: 2em;
+  border: transparent;
+  border-radius: 4px;
+  background-color: rgb(35, 35, 45);
+}
+
+#find-game-submit:hover,
+#create-game-submit:hover {
+  border: 1px solid rgb(145, 145, 145);
+}
+
+#find-game-input:hover,
+#create-game-input:hover {
+  background-color: rgb(65, 65, 65);
+}
+
+td {
+  width: 5.5rem;
+  height: 5.5rem;
+  text-align: center;
+  vertical-align: middle;
+  border: 1px solid rgb(255, 255, 255);
+  position: relative;
+}
+
+td:hover {
+  background-color: rgba(90, 87, 255, 0.6);
+}
+
+.white {
+  background-color: #6670b1;
+}
+
+.black {
+  background-color: #1d2557;
+}
+
+.piece {
+  width: 60%;
+  height: 60%;
+}
+
+img {
+  background-color: transparent;
+  width: 45px;
+  height: 45px;
+}
+
+#chessboard {
+  border-collapse: collapse;
+  vertical-align:middle;
+  height: 100%;
+}
+
+.highlight {
+  background-color: rgba(73, 70, 255, 0.6);
+}
+
+#whiteScore, #blackScore {
+  position: relative;
+  right: 21.5em;
+  padding: 1em;
+  margin: auto;
+  height: 1em;
+}
+
+#blackScore {
+  margin-top: 10px;
+  vertical-align: bottom;
+  padding-top: 20px;
+}
+
+#sidebar {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 10px;
+  width: 18%;
+  height: 200px;
+  border: 2px solid #6670b1;
+  padding-top: 50px;
+  border-radius: 7px;
+  margin: 45px;
+  margin-top: 0px;
+  max-width: 175px;
+}
+
+#turn {
+  position: relative;
+  top: 80px;
+  font-size: 20px;
+  text-align: center;
+  width: 80%;
+  height: 30px;
+  color: aliceblue;
+  font-weight: 500;
+}
+
+.new-game {
+  width: 80%;
+  min-width:125px;
+  border: 1px solid #6670b1;
+  border-radius: 8px;
+  height: 40px;
+  font-size: 20px;
+  background-color: rgb(27,27,27);
+  color: aliceblue;
+}
+
+.new-game:hover {
+  background-color: rgb(65, 65, 65);
+}
+
+.letters {
+  font-size: 1.6vw;
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  font-weight: 500;
+  margin-right: 3px;
+  background-color: inherit;
+}
+
+.numbers {
+  font-size: 1.6vw;
+  position: absolute;
+  top: 0;
+  left: 0;
+  font-weight: 500;
+  margin-left: 3px;
+  background-color: inherit;
+}
+
+.white .letters, .white .numbers {
+  color: #1d2557;
+}
+
+.black > .letters, .black .numbers {
+  color: #6670b1;
+}
+
+#middle {
+  display: flex;
+  justify-content:center;
+  position: relative;
+  right: 9em;
+}
+
+@media (max-width: 1200px) {
+  td {
+    height: 6.9vw;
+    width: 6.9vw;
+  }
+
+  #sidebar {
+    flex-direction: row;
+    width: 54%;
+    height: 0;
+    max-width: unset;
+    z-index: 2;
+  }
+
+  .new-game {
+    width: 60%;
+    bottom: 20px;
+    position: relative;
+    height: 30px;
+  }
+
+  #turn {
+    top: unset;
+    bottom: 18px;
+    font-size: 18px;
+  }
+
+  #middle {
+    left: 0em;
+    flex-direction: column;
+    align-items: center;
+    bottom: 25px;
+  }
+
+  #whiteScore, 
+  #blackScore {
+    right: 27%;
+  }
+
+  #blackScore {
+    top: 5.25em;
+    z-index: 1;
+  }
+
+  #whiteScore {
+    bottom: 1em;
+    padding: 0;
+  }
+}
+
+@media (max-width: 1050px) {
+  td {
+    height: 7.8vw;
+    width: 7.8vw;
+  }
+  
+  #sidebar {
+    width: 61%;
+  }
+
+  #whiteScore, 
+  #blackScore {
+    right: 30.6%;
+  }
+
+  .numbers,
+  .letters {
+    font-size: 2vw;
+  }
+}
+
+@media (max-width: 800px) {
+  td {
+    height: 10vw;
+    width: 10vw;
+    min-width: unset;
+    min-height: unset;
+  }
+
+  #sidebar {
+    width: 78%;
+  }
+
+  #whiteScore, 
+  #blackScore {
+    right: 39%;
+  }
+
+  .numbers,
+  .letters {
+    font-size: 2.5vw;
+  }
+}
