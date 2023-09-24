@@ -1,6 +1,15 @@
 package main
 
-import "fmt"
+import (
+	"fmt"
+)
+
+func abs(n int) int {
+	if n < 0 {
+		return -n
+	}
+	return n
+}
 
 func copy(board [8][8]byte) [8][8]byte {
 	var boardCopy [8][8]byte
@@ -160,7 +169,46 @@ func Move(i1, j1, i2, j2 int, b *Board) {
 }
 
 func isValidMovePiece(piece byte, i1, j1, i2, j2 int) bool {
-	return false
+	switch piece {
+		case 'P':
+			if i1 == 1 && i2 == 3 && j1 == j2 {
+				return true
+			} else if i2 - i1 == 1 && j1 == j2 {
+				return true
+			} else if i2 - i1 == 1 && abs(j2 - j1) == 1 {
+				return true
+			} else {
+				return false
+			}
+		case 'p':
+			if i1 == 6 && i2 == 4 && j1 == j2 {
+				return true
+			} else if i2 - i1 == -1 && j1 == j2 {
+				return true
+			} else if i2 - i1 == -1 && abs(j2 - j1) == 1 {
+				return true
+			} else {
+				return false
+			}
+		case 'r', 'R':
+			return i1 == i2 || j1 == j2
+		case 'n', 'N':
+			if abs(i2 - i1) == 1 && abs(j2 - j1) == 2 {
+				return true
+			} else if abs(i2 - i1) == 2 && abs(j2 - j1) == 1 {
+				return true
+			} else {
+				return false
+			}
+		case 'b', 'B':
+			return abs(i2 - i1) == abs(j2 - j1)
+		case 'q', 'Q':
+			return i1 == i2 || j1 == j2 || abs(i2 - i1) == abs(j2 - j1)
+		case 'k', 'K':
+			return abs(i2 - i1) <= 1 && abs(j2 - j1) <= 1
+		default:
+			return false
+	}
 }
 
 func isValidMove(board [8][8]byte, i1, j1, i2, j2 int, whitesTurn bool) bool {
