@@ -25,7 +25,6 @@ type WSMsg struct {
     Checkmate bool `json:"checkmate"`
 }
 
-
 func index(w http.ResponseWriter, r *http.Request) {
     http.ServeFile(w, r, "index.html")
 }
@@ -39,17 +38,20 @@ func game(w http.ResponseWriter, r *http.Request) {
         }
     }
     if len(pathParts) == 2 {
+        id := pathParts[1]
+        if _, has := Boards[id]; !has {
+            board := NewBoard(id)
+            Boards[id] = board
+        }
         http.ServeFile(w, r, "game.html")
     } else if len(pathParts) == 3 {
         id := pathParts[1]
-        board := NewBoard()
-        board.ID = id
+        board := NewBoard(id)
         Boards[id] = board
         http.ServeFile(w, r, "game.html")
     } else {
         panic("game: invalid URL")
     }
-    
 }
 
 func handleWS(w http.ResponseWriter, r *http.Request) {
@@ -129,8 +131,6 @@ func main() {
     http.HandleFunc("/", index)
     http.HandleFunc("/game/", game)
     http.HandleFunc("/ws/", handleWS)
-
-    Boards["1234"] = NewBoard()
 
     static := http.FileServer(http.Dir("./static"))
     http.Handle("/static/", http.StripPrefix("/static/", static))

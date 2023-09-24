@@ -15,9 +15,9 @@ type Board struct {
     BlackKingMoved bool
 }
 
-func NewBoard() *Board {
+func NewBoard(id string) *Board {
 	return &Board{
-        ID: "default",
+        ID: id,
         Content: "RNBQKBNRPPPPPPPP                                pppppppprnbqkbnr",
         WhitesTurn: true,
         Checkmate: false,
