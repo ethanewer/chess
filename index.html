@@ -1,62 +1,75 @@
 <!DOCTYPE html>
 <html>
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Chess</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@200;300;400;500;600&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@200;300;400;500;600&display=swap"
+      rel="stylesheet"
+    />
     <link rel="stylesheet" type="text/css" href="/static/style.css" />
-</head>
-<body id="home-page">
-  <div id="start-game">
-    <div id="create-game">
-      <h2>Create Game</h2>
-      <input id="create-game-input" type="text" size="100" placeholder="Create game ID">
-      <input id="create-game-submit" type="button" value="Enter">
-      
-      <script>
-        document.querySelector('#create-game-input').focus();
-        document.querySelector('#create-game-input').onkeyup = function(e) {
-            if (e.keyCode === 13) {  
-                document.querySelector('#create-game-submit').click();
-            }
-        };
+  </head>
+  <body id="home-page">
+    <div id="start-game">
+      <div id="create-game">
+        <h2>Create Game</h2>
+        <input
+          id="create-game-input"
+          type="text"
+          size="100"
+          placeholder="Create game ID"
+        />
+        <input id="create-game-submit" type="button" value="Enter" />
 
-        document.querySelector('#create-game-submit').onclick = function(e) {
-            var roomName = document.querySelector('#create-game-input').value;
+        <script>
+          document.querySelector("#create-game-input").focus();
+          document.querySelector("#create-game-input").onkeyup = function (e) {
+            if (e.keyCode === 13) {
+              document.querySelector("#create-game-submit").click();
+            }
+          };
+
+          document.querySelector("#create-game-submit").onclick = function (e) {
+            var roomName = document.querySelector("#create-game-input").value;
             if (roomName.length === 0) {
-              roomName = 'default';
+              roomName = "default";
             }
-            window.location.href = '/game/' + roomName + '/';
-        };
-      </script>
-    </div>
-    <h3>Or</h3>
-    <div id="find-game">
-      <h2>Join Game</h2>
-      <input id="find-game-input" type="text" size="100" placeholder="Enter game ID">
-      <input id="find-game-submit" type="button" value="Enter">
+            window.location.href = "/game/" + roomName + "/";
+          };
+        </script>
+      </div>
+      <h3>Or</h3>
+      <div id="find-game">
+        <h2>Join Game</h2>
+        <input
+          id="find-game-input"
+          type="text"
+          size="100"
+          placeholder="Enter game ID"
+        />
+        <input id="find-game-submit" type="button" value="Enter" />
 
-      <script>
-        document.querySelector('#find-game-input').focus();
-        document.querySelector('#find-game-input').onkeyup = function(e) {
-            if (e.keyCode === 13) {  
-                document.querySelector('#find-game-submit').click();
+        <script>
+          document.querySelector("#find-game-input").focus();
+          document.querySelector("#find-game-input").onkeyup = function (e) {
+            if (e.keyCode === 13) {
+              document.querySelector("#find-game-submit").click();
             }
-        };
+          };
 
-        document.querySelector('#find-game-submit').onclick = function(e) {
-            var roomName = document.querySelector('#find-game-input').value;
+          document.querySelector("#find-game-submit").onclick = function (e) {
+            var roomName = document.querySelector("#find-game-input").value;
             if (roomName.length === 0) {
-              roomName = 'default';
+              roomName = "default";
             }
-            window.location.href = '/game/' + roomName + '/';
-        };
-      </script>
+            window.location.href = "/game/" + roomName + "/";
+          };
+        </script>
+      </div>
     </div>
-  </div>
-</body>
+  </body>
 </html>

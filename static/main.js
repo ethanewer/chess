@@ -4,34 +4,34 @@ const id = path.split("/")[2];
 const socket = new WebSocket(`ws://${window.location.host}/ws/${id}/`);
 
 socket.onmessage = (event) => {
-    let msg = JSON.parse(event.data);
-    let id = msg.id;
-    let content = msg.content
-    let whitesTurn = msg.whitesTurn
-    let checkmate = msg.checkmate
-    console.log(id, content, whitesTurn, checkmate);
-    print(content)
+  let msg = JSON.parse(event.data);
+  let id = msg.id;
+  let content = msg.content
+  let whitesTurn = msg.whitesTurn
+  let checkmate = msg.checkmate
+  console.log(id, content, whitesTurn, checkmate);
+  print(content)
 };
 
-socket.onclose = function(e) {
-    console.error('Game socket closed unexpectedly');
+socket.onclose = function (e) {
+  console.error('Game socket closed unexpectedly');
 };
 
 const imageUrls = {
-    whitePawn: "/static/images/White Pawn.png",
-    blackPawn: "/static/images/Black Pawn.png",
-    whiteRook: "/static/images/White Rook.png",
-    blackRook: "/static/images/Black Rook.png",
-    whiteKnight: "/static/images/White Knight.png",
-    blackKnight: "/static/images/Black Knight.png",
-    whiteBishop: "/static/images/White Bishop.png",
-    blackBishop: "/static/images/Black Bishop.png",
-    whiteQueen: "/static/images/White Queen.png",
-    blackQueen: "/static/images/Black Queen.png",
-    whiteKing: "/static/images/White King.png",
-    blackKing: "/static/images/Black King.png"
+  whitePawn: "/static/images/White Pawn.png",
+  blackPawn: "/static/images/Black Pawn.png",
+  whiteRook: "/static/images/White Rook.png",
+  blackRook: "/static/images/Black Rook.png",
+  whiteKnight: "/static/images/White Knight.png",
+  blackKnight: "/static/images/Black Knight.png",
+  whiteBishop: "/static/images/White Bishop.png",
+  blackBishop: "/static/images/Black Bishop.png",
+  whiteQueen: "/static/images/White Queen.png",
+  blackQueen: "/static/images/Black Queen.png",
+  whiteKing: "/static/images/White King.png",
+  blackKing: "/static/images/Black King.png"
 };
-        
+
 function print(boardString) {
   let boardArr = [];
   for (let i = 0; i < 8; i++) {
@@ -42,14 +42,14 @@ function print(boardString) {
     boardArr.push(row);
   }
   for (let k = 0; k < 64; k++) {
-    boardArr[Math.floor(k/8)][k%8] = boardString[k];
+    boardArr[Math.floor(k / 8)][k % 8] = boardString[k];
   }
   const table = document.getElementById('chessboard');
   while (table.rows.length > 0) {
     table.deleteRow(0);
   }
   let clickCount = 0;
-  
+
   for (let i = 0; i < 8; i++) {
     const row = document.createElement('tr');
     for (let j = 0; j < 8; j++) {
@@ -61,7 +61,7 @@ function print(boardString) {
       }
       if (i === 7) {
         let div = document.createElement("div");
-        div.textContent = String.fromCharCode(j+65);
+        div.textContent = String.fromCharCode(j + 65);
         div.classList.add('letters');
         cell.appendChild(div);
       }
@@ -100,45 +100,45 @@ function print(boardString) {
           img.src = imageUrls.blackKing;
         }
         cell.appendChild(img);
-      }        
+      }
 
       var pieceI;
       var pieceJ;
-      cell.setAttribute("id",i+" "+j);
+      cell.setAttribute("id", i + " " + j);
       cell.addEventListener("click", e => {
-          if (clickCount === 0) {
-            pieceI = i;
-            pieceJ = j;
-            clickCount++;
-            cell.classList.add("highlight");
-          }
-          else if (clickCount === 1) {
-              let x = e.clientX;
-              let y = e.clientY;
-              
-              for (let l = 0; l < 8; l++) {
-                for (let m = 0; m < 8; m++) {
-                  let c = document.getElementById(l+" "+m);
-                  if (c) {
-                    let cBound = c.getBoundingClientRect();
+        if (clickCount === 0) {
+          pieceI = i;
+          pieceJ = j;
+          clickCount++;
+          cell.classList.add("highlight");
+        }
+        else if (clickCount === 1) {
+          let x = e.clientX;
+          let y = e.clientY;
 
-                    if (x >= cBound.left && x <= cBound.right && y >= cBound.top && y <= cBound.bottom) {
-                      socket.send("" + pieceI + pieceJ + l + m);
-                      document.getElementById(pieceI+" "+pieceJ).classList.remove("highlight");
-                      break;
-                    }
-                  }
-                  
+          for (let l = 0; l < 8; l++) {
+            for (let m = 0; m < 8; m++) {
+              let c = document.getElementById(l + " " + m);
+              if (c) {
+                let cBound = c.getBoundingClientRect();
+
+                if (x >= cBound.left && x <= cBound.right && y >= cBound.top && y <= cBound.bottom) {
+                  socket.send("" + pieceI + pieceJ + l + m);
+                  document.getElementById(pieceI + " " + pieceJ).classList.remove("highlight");
+                  break;
                 }
               }
-              clickCount = 0;
+
+            }
           }
-        });
+          clickCount = 0;
+        }
+      });
       row.appendChild(cell);
     }
     table.appendChild(row);
   }
-  
+
   let whiteScore = 0, blackScore = 0
   for (let i = 0; i < boardString.length; i++) {
     if (boardString.charAt(i) === ' ') continue;
