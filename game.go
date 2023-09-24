@@ -11,6 +11,14 @@ func abs(n int) int {
 	return n
 }
 
+func isupper(c byte) bool {
+	return 'A' <= c && c <= 'Z'
+}
+
+func islower(c byte) bool {
+	return 'a' <= c && c <= 'z'
+}
+
 func copy(board [8][8]byte) [8][8]byte {
 	var boardCopy [8][8]byte
 	for i := 0; i < 8; i++ {
@@ -212,7 +220,24 @@ func isValidMovePiece(piece byte, i1, j1, i2, j2 int) bool {
 }
 
 func isValidMove(board [8][8]byte, i1, j1, i2, j2 int, whitesTurn bool) bool {
-	return false;
+	piece := board[i1][j1]
+	if (whitesTurn && isupper(piece)) || (!whitesTurn && islower(piece)) {
+		return false
+	} else if i1 == i2 && j1 == j2 {
+		return false
+	} else if piece == ' ' {
+		return false
+	} else if board[i2][j2] != ' ' && ((islower(board[i1][j1]) && islower(board[i2][j2])) || (isupper(board[i1][j1]) && isupper(board[i2][j2]))) {
+		return false
+	} else if (piece == 'p' || piece == 'P') && j1 != j2 && board[i2][j2] == ' ' {
+		return false
+	} else if (piece == 'p' || piece == 'P') && j1 == j2 && board[i2][j2] != ' ' {
+		return false
+	} else if !isValidMovePiece(piece, i1, j1, i2, j2) {
+		return false
+	} else {
+		return true
+	}
 }
 
 func isValidCheck(board [8][8]byte, i1, j1, i2, j2 int, whitesTurn bool) bool {
