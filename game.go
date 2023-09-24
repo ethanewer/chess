@@ -173,6 +173,8 @@ func Move(i1, j1, i2, j2 int, b *Board) {
 
 	board[i1][j1] = ' '
 
+	b.Content = board2string(board)
+	b.WhitesTurn = !b.WhitesTurn
 	b.Checkmate = checkmate(copy(board), !b.WhitesTurn)
 }
 
@@ -241,7 +243,7 @@ func isValidMove(board [8][8]byte, i1, j1, i2, j2 int, whitesTurn bool) bool {
 }
 
 func isValidCheck(board [8][8]byte, i1, j1, i2, j2 int, whitesTurn bool) bool {
-	return false
+	return true
 }
 
 func inCheck(board [8][8]byte, whitesTurn bool) bool {

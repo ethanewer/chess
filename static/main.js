@@ -11,6 +11,13 @@ socket.onmessage = (event) => {
   let checkmate = msg.checkmate
   console.log(id, content, whitesTurn, checkmate);
   print(content)
+  if (checkmate) {
+    if (whitesTurn) {
+      alert("White is in checkmate,\nBlack wins!");
+    } else {
+      alert("Black is in checkmate,\nWhite wins!");
+    }
+  }
 };
 
 socket.onclose = function (e) {
@@ -194,12 +201,4 @@ function print(boardString) {
   bScoreDiv.textContent = blackScoreDif;
   let wScoreDiv = document.getElementById('whiteScore');
   wScoreDiv.textContent = whiteScoreDif;
-}
-
-if (checkmate) {
-  if (whites_turn) {
-    alert("White is in checkmate,\nBlack wins!");
-  } else {
-    alert("Black is in checkmate,\nWhite wins!");
-  }
 }

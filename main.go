@@ -104,6 +104,7 @@ func readLoop(id string, ws *websocket.Conn) {
 }
 
 func broadcast(id string) {
+    fmt.Println("broadcast:", id)
     board := Boards[id]
 	for _, ws := range Conns[id] {
         go func(ws *websocket.Conn) {
