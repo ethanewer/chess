@@ -16,6 +16,5 @@ Technologies Used
 - JavaScript: Front-end interactivity and real-time gameplay.
 - CSS: Responsive design for varying screen sizes.
 
-  available online at: https://multiplayerchessapp-u7ebr.ondigitalocean.app/
-
-  old version using Django: https://github.com/eliRoden/chess-website
+Available online at: https://multiplayerchessapp-u7ebr.ondigitalocean.app/
+Old version using Django: https://github.com/eliRoden/chess-website
