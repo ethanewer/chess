@@ -17,4 +17,5 @@ Technologies Used
 - CSS: Responsive design for varying screen sizes.
 
 Available online at: https://multiplayerchessapp-u7ebr.ondigitalocean.app/
+
 Old version using Django: https://github.com/eliRoden/chess-website
