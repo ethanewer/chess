@@ -5,6 +5,7 @@ import (
 	"fmt"
 	"io"
 	"log"
+	"math/rand"
 	"net/http"
 	"strings"
 
@@ -29,10 +30,25 @@ func index(w http.ResponseWriter, r *http.Request) {
     http.ServeFile(w, r, "index.html")
 }
 
+func new(w http.ResponseWriter, r *http.Request) {
+    chars := "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz"
+    foundID := false
+    var id string
+    for !foundID {
+        id = ""
+        for i := 0; i < 4; i++ {
+            id += string(chars[rand.Intn(len(chars))])
+        }
+        if _, has := Boards[id]; !has {
+            foundID = true
+        }
+    }
+    http.Redirect(w, r, "/game/" + id, http.StatusSeeOther)
+}
+
 func game(w http.ResponseWriter, r *http.Request) {
-    unfilteredPathParts := strings.Split(r.URL.Path, "/")
     var pathParts []string
-    for _, str := range unfilteredPathParts {
+    for _, str := range strings.Split(r.URL.Path, "/") {
         if str != "" {
             pathParts = append(pathParts, str)
         }
@@ -61,9 +77,8 @@ func handleWS(w http.ResponseWriter, r *http.Request) {
     }
     defer ws.Close()
 
-    unfilteredPathParts := strings.Split(r.URL.Path, "/")
     var pathParts []string
-    for _, str := range unfilteredPathParts {
+    for _, str := range strings.Split(r.URL.Path, "/") {
         if str != "" {
             pathParts = append(pathParts, str)
         }
@@ -130,6 +145,7 @@ func broadcast(id string) {
 
 func main() {
     http.HandleFunc("/", index)
+    http.HandleFunc("/new/", new)
     http.HandleFunc("/game/", game)
     http.HandleFunc("/ws/", handleWS)
 
