@@ -1,6 +1,6 @@
 # Real-time Chess Website
 
-This real-time chess website uses Go for the backend and JavaScript for the frontend to provide an interactive real-time chess-playing experience. It leverages WebSockets for real-time updates, allowing users to create or join existing games by entering a unique game code. The website boasts a responsive front-end design featuring a "New Game" button, a turn indicator, and a score tracker.
+This real-time chess website uses Go for the backend and JavaScript for the frontend to provide an interactive real-time chess-playing experience. It leverages WebSockets for real-time updates, allowing users to create or join existing games by entering a unique game code. The website features a responsive front-end design featuring a "New Game" button, turn indicator, and score tracker.
 
 Features
 - Real-time chess gameplay with automatic updates using WebSockets.
