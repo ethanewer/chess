@@ -243,7 +243,17 @@ func isValidMove(board [8][8]byte, i1, j1, i2, j2 int, whitesTurn bool) bool {
 }
 
 func isValidCheck(board [8][8]byte, i1, j1, i2, j2 int, whitesTurn bool) bool {
-	return true
+	if board[i1][j1] == 'p' && i2 == 0 {
+		board[i2][j2] = 'q'
+	} else if board[i1][j1] == 'P' && i2 == 7 {
+		board[i2][j2] = 'Q'
+	} else {
+		board[i2][j2] = board[i1][j1]
+	}
+
+	board[i1][j1] = ' '
+	
+	return !inCheck(board, whitesTurn)
 }
 
 func inCheck(board [8][8]byte, whitesTurn bool) bool {
