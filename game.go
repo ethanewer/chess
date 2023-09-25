@@ -270,6 +270,49 @@ func canCastle(
 	leftBlackRookMoved, rightBlackRookMoved, blackKingMoved,
 	castlingLeft bool,
 ) bool {
-	return false
+	if inCheck(board, whitesTurn) {
+		return false
+	}
+	if whitesTurn && castlingLeft {
+		if whiteKingMoved || leftWhiteRookMoved {
+			return false
+		}
+		for j := 1; j < 4; j++ {
+			if board[7][j] != ' ' {
+				return false
+			}
+		}
+	}
+	if whitesTurn && !castlingLeft {
+		if whiteKingMoved || rightWhiteRookMoved {
+			return false
+		}
+		for j := 5; j < 7; j++ {
+			if board[7][j] != ' ' {
+				return false
+			}
+		}
+	}
+	if !whitesTurn && castlingLeft {
+		if blackKingMoved || leftBlackRookMoved {
+			return false
+		}
+		for j := 1; j < 4; j++ {
+			if board[0][j] != ' ' {
+				return false
+			}
+		}
+	}
+	if !whitesTurn && castlingLeft {
+		if blackKingMoved || rightBlackRookMoved {
+			return false
+		}
+		for j := 5; j < 7; j++ {
+			if board[0][j] != ' ' {
+				return false
+			}
+		}
+	}
+	return true
 }
 
