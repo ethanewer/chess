@@ -477,7 +477,21 @@ func inCheck(board [8][8]byte, whitesTurn bool) bool {
 }
 
 func checkmate(board [8][8]byte, whitesTurn bool) bool {
-	return false
+	if !inCheck(board, whitesTurn) {
+        return false
+	}
+    for i1 := 0; i1 < 8; i1++ {
+        for j1 := 0; j1 < 8; j1++ {
+            for i2 := 0; i2 < 8; i2++ {
+                for j2 := 0; j2 < 8; j2++ {
+                    if isValidMovePiece(board[i1][j1], i1, j1, i2 , j2) && isValidMove(copy(board), i1, j1, i2, j2, whitesTurn) && isValidCheck(copy(board), i1, j1, i2, j2, whitesTurn) {
+                        return false
+					}
+				}
+			}
+		}
+	}
+    return true
 }
 
 func canCastle(
