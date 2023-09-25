@@ -257,7 +257,223 @@ func isValidCheck(board [8][8]byte, i1, j1, i2, j2 int, whitesTurn bool) bool {
 }
 
 func inCheck(board [8][8]byte, whitesTurn bool) bool {
-	return false
+    ki, kj := -1, -1
+    for i, row := range board {
+        for j, piece := range row {
+            if (whitesTurn && piece == 'k') || (!whitesTurn && piece == 'K') {
+                ki, kj = i, j
+            }
+        }
+    }
+
+    for i, row := range board {
+        for j, piece := range row {
+            if isValidMove(board, i, j, ki, kj, !whitesTurn) {
+                if piece == 'n' || piece == 'N'{
+                    return true
+                } else if piece == 'p' || piece == 'P'{
+                    return true
+                } else if piece == 'k' || piece == 'K'{
+                    return true
+                } else if piece == 'b' || piece == 'B'{
+                    king_safe := false
+
+                    if i < ki && j < kj {
+                        for d := 1; d <  ki - i; d++ {
+                            if i + d > 7 || j + d > 7 {
+                                break
+                            }
+                            if board[i + d][j + d] != ' ' {
+                                king_safe = true
+                                break
+                            }
+                        }
+                    }
+                    if i < ki && j > kj {
+                        for d := 1; d < ki - i; d++ {
+                            if i + d > 7 || j - d < 0 {
+                                break
+                            }
+                            if board[i + d][j - d] != ' ' {
+                                king_safe = true
+                                break
+                            }
+                        }
+                    }
+                    if i > ki && j < kj {
+                        for d := 1; d < i-ki; d++ {
+                            if i - d < 0 || j + d > 7 {
+                                break
+                            }
+                            if board[i - d][j + d] != ' ' {
+                                king_safe = true
+                                break
+                            }
+                        }
+                    }
+                    if i > ki && j > kj {
+                        for d := 1; d < i - ki; d++ {
+                            if i - d < 0 || j - d < 0 {
+                                break
+                            }
+                            if board[i - d][j - d] != ' ' {
+                                king_safe = true
+                                break
+                            }
+                        }
+                    }
+                    if  !king_safe {
+                        return true
+                    }
+                } else if piece == 'r' || piece == 'R' {
+                    king_safe := false
+
+                    if i < ki {
+                        for d := 1; d < ki - i; d++ {
+                            if i + d > 7 {
+                                break
+                            }
+                            if board[i + d][j] != ' ' {
+                                king_safe = true
+                                break
+                            }
+                        }
+                    }
+                    if i > ki {
+                        for d := 1; d < i - ki; d++ {
+                            if i - d < 0 {
+                                break
+                            }
+                            if board[i - d][j] != ' ' {
+                                king_safe = true
+                                break
+                            }
+                        }
+                    }
+                    if j < kj {
+                        for d := 1; d < kj - j; d++ {
+                            if j + d > 7 {
+                                break
+                            }
+                            if board[i][j + d] != ' ' {
+                                king_safe = true
+                                break
+                            }   
+                        }
+                    }
+                    if j > kj {
+                        for d := 1; d < j - kj; d++ {
+                            if j - d < 0 {
+                                break
+                            }
+                            if board[i][j - d] != ' ' {
+                                king_safe = true
+                                break
+                            }   
+                        }
+                    }
+                    if  !king_safe {
+                        return true
+                    }
+                } else if piece == 'q' || piece == 'Q' {
+                    king_safe := false
+
+                    if i < ki && j < kj {
+                        for d := 1; d < ki - i; d++ {
+                            if i + d > 7 || j + d > 7 {
+                                break
+                            }
+                            if board[i + d][j + d] != ' ' {
+                                king_safe = true
+                                break
+                            }
+                        }
+                    }
+                    if i < ki && j > kj {
+                        for d := 1; d < ki - i; d++ {
+                            if i + d > 7 || j - d < 0 {
+                                break
+                            }
+                            if board[i + d][j - d] != ' ' {
+                                king_safe = true
+                                break
+                            }
+                        }
+                    }
+                    if i > ki && j < kj {
+                        for d := 1; d < i - ki; d++ {
+                            if i - d < 0 || j + d > 7 {
+                                break
+                            }
+                            if board[i - d][j + d] != ' ' {
+                                king_safe = true
+                                break
+                            }
+                        }
+                    }
+                    if i > ki && j > kj {
+                        for d := 1; d < i - ki; d++ {
+                            if i - d < 0 || j - d < 0 {
+                                break
+                            }
+                            if board[i - d][j - d] != ' ' {
+                                king_safe = true
+                                break
+                            }
+                        }
+                    }
+                    if i < ki {
+                        for d := 1; d < ki - i; d++ {
+                            if i + d > 7 {
+                                break
+                            }
+                            if board[i + d][j] != ' ' {
+                                king_safe = true
+                                break
+                            }
+                        }
+                    }
+                    if i > ki {
+                        for d := 1; d < i - ki; d++ {
+                            if i - d < 0 {
+                                break
+                            }
+                            if board[i - d][j] != ' ' {
+                                king_safe = true
+                                break
+                            }
+                        }
+                    }
+                    if j < kj {
+                        for d := 1; d < kj - j; d++ {
+                            if j + d > 7 {
+                                break
+                            }
+                            if board[i][j + d] != ' ' {
+                                king_safe = true
+                                break
+                            }   
+                        }
+                    }
+                    if j > kj {
+                        for d := 1; d < j - kj; d++ {
+                            if j - d < 0 {
+                                break
+                            }
+                            if board[i][j - d] != ' ' {
+                                king_safe = true
+                                break
+                            }       
+                        }
+                    }
+                    if !king_safe {
+                        return true
+                    }
+                }
+            }
+        }
+    }
+    return false
 }
 
 func checkmate(board [8][8]byte, whitesTurn bool) bool {
