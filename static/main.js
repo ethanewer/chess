@@ -1,7 +1,7 @@
 const path = window.location.pathname;
 const id = path.split("/")[2];
 
-const socket = new WebSocket(`ws://${window.location.host}/ws/${id}/`);
+const socket = new WebSocket(`wss://${window.location.host}/ws/${id}/`);
 
 socket.onmessage = (event) => {
   let msg = JSON.parse(event.data);
@@ -207,5 +207,5 @@ function print(boardString) {
   let wScoreDiv = document.getElementById('whiteScore');
   wScoreDiv.textContent = whiteScoreDif;
 
-  
+
 }
