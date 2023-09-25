@@ -23,6 +23,7 @@ socket.onmessage = (event) => {
   } else {
     document.getElementById('turn').innerHTML = 'Turn: black';
   }
+  document.getElementById('gameId').innerHTML = 'Game ID: ' + msg.id;
 };
 
 socket.onclose = function (e) {

@@ -44,6 +44,10 @@ body {
   background-color: inherit;
 }
 
+#create-game {
+  width: 50%;
+}
+
 #start-game > h3 {
   background-color: inherit;
 }
@@ -59,11 +63,22 @@ body {
 
 #find-game-submit,
 #create-game-submit {
-  width: 30%;
-  height: 2em;
   border: transparent;
   border-radius: 4px;
   background-color: rgb(35, 35, 45);
+}
+
+#find-game-submit {
+  width: 30%;
+  height: 2em;
+}
+
+#create-game-submit {
+  width: 100%;
+  height: 2em;
+  font-size: 1.25em;
+  font-weight: 600;
+
 }
 
 #find-game-submit:hover,
@@ -135,12 +150,9 @@ img {
 #sidebar {
   display: flex;
   flex-direction: column;
-  align-items: center;
-  padding: 10px;
   width: 18%;
-  height: 200px;
+  height: 240px;
   border: 2px solid #6670b1;
-  padding-top: 50px;
   border-radius: 7px;
   margin: 45px;
   margin-top: 0px;
@@ -148,17 +160,16 @@ img {
 }
 
 #turn {
-  position: relative;
-  top: 80px;
   font-size: 20px;
   text-align: center;
   width: 80%;
-  height: 30px;
   color: aliceblue;
-  font-weight: 500;
+  font-weight: 400;
+  margin: auto;
 }
 
 .new-game {
+  margin: auto;
   width: 80%;
   min-width:125px;
   border: 1px solid #6670b1;
@@ -171,6 +182,15 @@ img {
 
 .new-game:hover {
   background-color: rgb(65, 65, 65);
+}
+
+#gameId {
+  font-size: 20px;
+  text-align: center;
+  width: 80%;
+  color: aliceblue;
+  font-weight: 400;
+  margin: auto;
 }
 
 .letters {
@@ -217,22 +237,10 @@ img {
   #sidebar {
     flex-direction: row;
     width: 54%;
-    height: 0;
+    height: auto;
     max-width: unset;
     z-index: 2;
-  }
-
-  .new-game {
-    width: 60%;
-    bottom: 20px;
-    position: relative;
-    height: 30px;
-  }
-
-  #turn {
-    top: unset;
-    bottom: 18px;
-    font-size: 18px;
+    padding: 10px;
   }
 
   #middle {
