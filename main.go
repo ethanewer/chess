@@ -147,7 +147,7 @@ func main() {
     http.HandleFunc("/", index)
     http.HandleFunc("/new/", new)
     http.HandleFunc("/game/", game)
-    http.HandleFunc("/wss/", handleWS)
+    http.HandleFunc("/ws/", handleWS)
 
     static := http.FileServer(http.Dir("./static"))
     http.Handle("/static/", http.StripPrefix("/static/", static))
