@@ -17,30 +17,8 @@
     <div id="start-game">
       <div id="create-game">
         <h2>Create Game</h2>
-        <input
-          id="create-game-input"
-          type="text"
-          size="100"
-          placeholder="Create game ID"
-        />
-        <input id="create-game-submit" type="button" value="Enter" />
-
-        <script>
-          document.querySelector("#create-game-input").focus();
-          document.querySelector("#create-game-input").onkeyup = function (e) {
-            if (e.keyCode === 13) {
-              document.querySelector("#create-game-submit").click();
-            }
-          };
-
-          document.querySelector("#create-game-submit").onclick = function (e) {
-            var roomName = document.querySelector("#create-game-input").value;
-            if (roomName.length === 0) {
-              roomName = "default";
-            }
-            window.location.href = "/game/" + roomName + "/";
-          };
-        </script>
+        <input id="create-game-submit" type="button" value="New Game" 
+          onclick="{window.location.href = /new/}" />
       </div>
       <h3>Or</h3>
       <div id="find-game">
